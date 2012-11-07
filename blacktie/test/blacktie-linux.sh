@@ -8,9 +8,6 @@ else
   exit -1
 fi
 
-# Do not use the CI setting of JBOSS_HOME
-JBOSS_HOME=$WORKSPACE/jboss-as-7.1.1.Final
-
 if [ -z "${JBOSSAS_IP_ADDR+x}" ]; then
   echo JBOSSAS_IP_ADDR not set
   JBOSSAS_IP_ADDR=localhost
