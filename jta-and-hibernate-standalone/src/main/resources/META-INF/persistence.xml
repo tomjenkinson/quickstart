@@ -26,7 +26,7 @@
     <persistence-unit name="quickstart-persistence-unit" transaction-type="JTA">
         <class>org.jboss.narayana.quickstart.jta.QuickstartEntity</class>
         <properties>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle12cDialect"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <!-- Set Hibernate to use Narayana as a JTA platform -->
             <property name="hibernate.transaction.jta.platform" value="JBossTS"/>

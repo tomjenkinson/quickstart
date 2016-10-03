@@ -23,7 +23,7 @@ In your terminal navigate to the quickstart directory and execute one of the fol
 
 ### Commit demonstration
 
-    mvn clean package exec:java -Dexec.args="commit 'Test Value'"
+    mvn clean package exec:java -Dexec.args="commit 'Test Value'" -Dusername=$DBUSER -Dpassword=$DBPW -DserverName=$SVR_ADDRESS -DdatabaseName=$DBNAME
 
 This example executes the following steps:
 

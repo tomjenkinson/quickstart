@@ -32,9 +32,9 @@ public class TransactionalConnectionProvider implements ConnectionProvider {
 
     public static final String DATASOURCE_JNDI = "java:/quickstartDataSource";
 
-    public static final String USERNAME = "sa";
+    public static final String USERNAME = System.getProperty("username");
 
-    public static final String PASSWORD = "";
+    public static final String PASSWORD = System.getProperty("password");
 
     private final TransactionalDriver transactionalDriver;
 

@@ -32,7 +32,6 @@ import com.arjuna.ats.jta.common.jtaPropertyManager;
 import com.arjuna.ats.jta.recovery.XAResourceRecovery;
 import com.arjuna.ats.jta.utils.JNDIManager;
 import com.arjuna.common.internal.util.propertyservice.BeanPopulator;
-import org.h2.jdbcx.JdbcDataSource;
 import org.jboss.weld.environment.se.Weld;
 import org.jboss.weld.environment.se.WeldContainer;
 import org.jnp.server.NamingBeanImpl;
@@ -142,13 +141,15 @@ public class QuickstartApplication {
         }
     }
 
-    static JdbcDataSource getDataSource() {
-        JdbcDataSource dataSource = new JdbcDataSource();
-        dataSource.setURL("jdbc:h2:./target/quickstart.db");
-        dataSource.setUser(TransactionalConnectionProvider.USERNAME);
-        dataSource.setPassword(TransactionalConnectionProvider.PASSWORD);
+    static Object getDataSource() throws SQLException {
+        oracle.jdbc.xa.OracleXADataSource ds = new oracle.jdbc.xa.client.OracleXADataSource();
+        ds.setDriverType("thin");
+        ds.setServerName(System.getProperty("serverName"));
+        ds.setNetworkProtocol("tcp");
+        ds.setDatabaseName(System.getProperty("databaseName"));
+        ds.setPortNumber(1521);
 
-        return dataSource;
+        return ds;
     }
 
     static List<String> getRecoveryModuleClassNames() {

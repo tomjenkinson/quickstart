@@ -24,7 +24,7 @@
         <version.jnpserver>5.0.3.GA</version.jnpserver>
         <version.junit>4.11</version.junit>
         <version.h2>1.4.191</version.h2>
-        <version.hibernate>5.1.0.Final</version.hibernate>
+        <version.hibernate>5.1.2.Final</version.hibernate>
         <version.weld>2.3.4.Final</version.weld>
         <version.jboss-transaction-spi>7.5.0.Final</version.jboss-transaction-spi>
         <version.log4j>1.2.17</version.log4j>
@@ -46,6 +46,11 @@
     </repositories>
 
     <dependencies>
+        <dependency>
+            <groupId>oracle</groupId>
+            <artifactId>ojdbc7</artifactId>
+            <version>12c</version>
+        </dependency>
         <dependency>
             <groupId>org.jboss.narayana.jta</groupId>
             <artifactId>narayana-jta</artifactId>
