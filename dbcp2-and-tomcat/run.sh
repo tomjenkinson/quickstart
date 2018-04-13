@@ -2,12 +2,21 @@
 set -m
 
 export QUICKSTART_NAME=${PWD##*/}
-TOMCAT_VERSION=7.0.82
+TOMCAT_VERSION=9.0.5
 wget -nc https://archive.apache.org/dist/tomcat/tomcat-7/v$TOMCAT_VERSION/bin/apache-tomcat-$TOMCAT_VERSION.zip
 rm -rf apache-tomcat-$TOMCAT_VERSION
 unzip apache-tomcat-$TOMCAT_VERSION.zip
 export TOMCAT_HOME=$(pwd)/apache-tomcat-$TOMCAT_VERSION/
 chmod +x $TOMCAT_HOME/bin/catalina.sh
+cat <<EOT >> ${CATALINA_HOME}/conf/logging.properties
+org.apache.tomcat.tomcat-jdbc.level = ALL
+org.h2.level = ALL
+org.postgresql.level = ALL
+javax.sql.level = ALL
+org.apache.tomcat.tomcat-dbcp.level = ALL
+com.arjuna.level = ALL
+EOT
+
 mvn package
 rm -rf $TOMCAT_HOME/webapps/${QUICKSTART_NAME}/
 cp target/${QUICKSTART_NAME}.war $TOMCAT_HOME/webapps/
