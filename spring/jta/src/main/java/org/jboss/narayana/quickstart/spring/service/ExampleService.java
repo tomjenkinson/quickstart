@@ -23,9 +23,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.RequestScoped;
 import javax.transaction.Transaction;
 import javax.transaction.TransactionManager;
+import javax.ws.rs.BadRequestException;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
 
+@RequestScoped
+@Path("/")
 @Service
 public class ExampleService {
     @Autowired
@@ -40,6 +49,45 @@ public class ExampleService {
     @PostConstruct
     public void setupTable() {
         jdbc.execute("CREATE TABLE IF NOT EXISTS example ( id varchar(10), name varchar(32) )");
+    }
+
+    @GET
+    @Produces({"application/json"})
+    @javax.transaction.Transactional
+    @Path("/insert/{trigger}")
+    public Response testTransaction(@PathParam("trigger") int trigger) {
+//        try {
+            jdbc.execute("delete from example");
+            int count = testCommits(trigger);
+            return (Response.status(Response.Status.OK).entity("first get " + count).build());
+//        } catch (Exception ex) {
+//            Integer count = jdbc.queryForObject("select count(*) from example", Integer.class);
+//            return Response.status(Response.Status.BAD_REQUEST)
+//                    .entity(ex.getMessage() + " count in db in first get" + count).build();
+//        } finally {
+//            System.out.println("shutdownDatabase();");
+////            TxControl.disable(true);
+////            TransactionReaper.terminate(true);
+//        }
+    }
+
+
+    public int testCommits(int trigger) throws BadRequestException {
+        try {
+            Transaction transaction = tm.getTransaction();
+            xaResource.setFault(DummyXAResource.faultType.NONE);//HALT
+            transaction.enlistResource(xaResource);
+            jdbc.execute("insert into example values (1, 'test2')");
+            if (trigger == 1) {
+                jdbc.execute("insert into example values (1, 'test3')");
+            } else {
+                jdbc.execute("insert into examples values (1, 'test3')");
+            }
+            return jdbc.queryForObject("select count(*) from example", Integer.class);
+        } catch (Exception e) {
+            Integer count = jdbc.queryForObject("select count(*) from example", Integer.class);
+            throw new BadRequestException("insereted entries " + count + "exception" + e.getMessage());
+        }
     }
 
     @Transactional
@@ -68,6 +116,17 @@ public class ExampleService {
             System.out.println("testRecovery FAIL with " + e);
         }
     }
+
+    @GET
+    @Produces({"application/json"})
+    @javax.transaction.Transactional
+    @Path("/check")
+    public Response check() {
+        Integer count = jdbc.queryForObject("select count(*) from example", Integer.class);
+        System.out.println("check in the database (count = " + count + ")");
+        return (Response.status(Response.Status.OK).entity(""+count).build());
+    }
+
 
     public int checkRecord() {
         Integer count = jdbc.queryForObject("select count(*) from example", Integer.class);

@@ -22,6 +22,7 @@ import org.jboss.narayana.quickstart.spring.config.TransactionConfig;
 import org.jboss.narayana.quickstart.spring.xa.DummyXAResource;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -37,6 +38,7 @@ import static org.junit.Assert.assertEquals;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class,
         classes = {TransactionConfig.class, DatabaseConfig.class, DummyXAConfig.class})
+@Ignore
 public class TestJTA {
     @Resource
     private TransactionManager tm;
