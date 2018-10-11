@@ -1,3 +1,4 @@
+<!---
 JBoss, Home of Professional Open Source
 Copyright 2006, Red Hat Middleware LLC, and individual contributors
 as indicated by the @author tags. 
@@ -13,13 +14,12 @@ You should have received a copy of the GNU Lesser General Public License,
 v.2.1 along with this distribution; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 MA  02110-1301, USA.
-
-
 (C) 2005-2006,
 @author JBoss Inc.
 The trail map is provided with examples (the Banking application) that
 allow  a better  understanding   of the  way   to  use  the   JBossTS
 Programming interfaces.
+-->
 
 To build the sources files you should follow instructions given below:
 
