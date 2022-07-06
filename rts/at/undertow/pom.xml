@@ -27,9 +27,9 @@
 
     <properties>
         <version.narayana>5.12.8.Final-SNAPSHOT</version.narayana>
-        <version.jboss.logging>3.1.4.GA</version.jboss.logging>
+        <version.jboss.logging>3.5.0.Final</version.jboss.logging>
         <undertow.io.version>2.2.11.Final</undertow.io.version>
-        <version.resteasy>3.0.23.Final</version.resteasy>
+        <version.resteasy>4.7.2.Final</version.resteasy>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
@@ -60,9 +60,9 @@
             <version>${version.narayana}</version>
         </dependency>
         <dependency>
-          <groupId>org.jboss.resteasy</groupId>
-          <artifactId>resteasy-jaxrs</artifactId>
-          <version>3.0.16.Final</version>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-client</artifactId>
+            <version>${version.resteasy}</version>
         </dependency>
         <dependency>
             <groupId>org.jboss.narayana.arjunacore</groupId>

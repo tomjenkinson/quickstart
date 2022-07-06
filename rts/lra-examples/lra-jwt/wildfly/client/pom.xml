@@ -14,7 +14,6 @@
 
     <properties>
         <version.resteasy.client>4.6.0.Final</version.resteasy.client>
-        <version.resteasy.jaxrs>4.0.0.Beta5</version.resteasy.jaxrs>
         <version.nimbus.jose.jwt>7.9</version.nimbus.jose.jwt>
         <version.javax.json.api>1.1.4</version.javax.json.api>
         <version.org.glassfish.javax.json>1.1</version.org.glassfish.javax.json>
@@ -28,14 +27,6 @@
             <version>${version.resteasy.client}</version>
             <scope>compile</scope>
             <exclusions>
-                <exclusion>
-                    <groupId>org.jboss.spec.javax.ws.rs</groupId>
-                    <artifactId>jboss-jaxrs-api_2.1_spec</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.jboss.spec.javax.xml.bind</groupId>
-                    <artifactId>jboss-jaxb-api_2.3_spec</artifactId>
-                </exclusion>
                 <exclusion>
                     <groupId>org.jboss.spec.javax.annotation</groupId>
                     <artifactId>jboss-annotations-api_1.3_spec</artifactId>
@@ -85,13 +76,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-jaxrs</artifactId>
-            <version>${version.resteasy.jaxrs}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
             <groupId>com.nimbusds</groupId>
             <artifactId>nimbus-jose-jwt</artifactId>
             <version>${version.nimbus.jose.jwt}</version>
@@ -109,6 +93,11 @@
             <artifactId>javax.json</artifactId>
             <version>${version.org.glassfish.javax.json}</version>
         </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+        <version>4.0.1</version>
+    </dependency>
 
     </dependencies>
     <build>

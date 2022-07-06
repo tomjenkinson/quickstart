@@ -8,7 +8,7 @@
     <packaging>war</packaging>
 
     <properties>
-        <version.resteasy>3.0.23.Final</version.resteasy>
+        <version.resteasy>4.7.2.Final</version.resteasy>
         <version.h2>2.1.210</version.h2>
         <version.org.jboss.spec.javax.transaction>1.0.0.Final</version.org.jboss.spec.javax.transaction>
         <version.narayana.tomcat.integration>1.0.0.Final</version.narayana.tomcat.integration>
@@ -36,7 +36,7 @@
         </dependency>
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-jackson-provider</artifactId>
+            <artifactId>resteasy-jackson2-provider</artifactId>
             <version>${version.resteasy}</version>
         </dependency>
         <dependency>
