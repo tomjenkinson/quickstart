@@ -98,7 +98,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>2.2</version>
+                <version>2.3</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -108,6 +108,7 @@
                         <configuration>
                             <finalName>rts-undertow-qs</finalName>
                             <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <mainClass>org.jboss.narayana.rts.TxnTest</mainClass>
                                 </transformer>
