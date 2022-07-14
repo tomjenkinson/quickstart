@@ -1,18 +1,9 @@
 /*
- * Copyright 2015, Red Hat Middleware LLC, and individual contributors
- * as indicated by the @author tags.
- * See the copyright.txt in the distribution for a
- * full listing of individual contributors.
- * This copyrighted material is made available to anyone wishing to use,
- * modify, copy, or redistribute it subject to the terms and conditions
- * of the GNU Lesser General Public License, v. 2.1.
- * This program is distributed in the hope that it will be useful, but WITHOUT A
- * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
- * PARTICULAR PURPOSE.  See the GNU Lesser General Public License for more details.
- * You should have received a copy of the GNU Lesser General Public License,
- * v.2.1 along with this distribution; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
- * MA  02110-1301, USA.
+ *
+ * Copyright The Narayana Authors
+ *
+ * SPDX-License-Identifier: LGPL-2.1-only
+ *
  */
 package org.jboss.narayana.rts;
 
@@ -50,7 +41,6 @@ public class TxnHelper {
             response = client.target(txurl).request().post(Entity.entity(new Form(), MediaType.APPLICATION_FORM_URLENCODED_TYPE));
             Set<Link> links = response.getLinks();
 
-            EntityUtils.consume((HttpEntity) response.getEntity());
             if (response.getStatus() != HttpURLConnection.HTTP_CREATED)
                 throw new RuntimeException("beginTxn returned " + response.getStatus());
 
@@ -69,8 +59,6 @@ public class TxnHelper {
                     .request().put(Entity.entity(TxStatusMediaType.TX_COMMITTED, TxMediaType.TX_STATUS_MEDIA_TYPE));
 
             int sc = response.getStatus();
-
-            EntityUtils.consume((HttpEntity) response.getEntity());
 
             if (sc != HttpURLConnection.HTTP_OK)
                 throw new RuntimeException("endTxn returned " + sc);
