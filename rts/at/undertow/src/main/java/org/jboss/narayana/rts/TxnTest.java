@@ -20,6 +20,7 @@ import org.jboss.jbossts.star.service.TMApplication;
 import org.jboss.jbossts.star.util.TxLinkNames;
 
 import org.jboss.logging.Logger;
+import org.jboss.resteasy.plugins.server.undertow.UndertowJaxrsServer;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -42,8 +43,8 @@ public class TxnTest {
     static final String SVC2_URL = String.format("http://%s:%d%s", "localhost", SVC2_PORT, "/eg/service");
 
     static JAXRSServer txnServer;
-    static JAXRSServer svc1Server;
-    static JAXRSServer svc2Server;
+    static UndertowJaxrsServer svc1Server;
+    static UndertowJaxrsServer svc2Server;
 
     static Client txnClient;
     static Client svc1Client;
@@ -53,11 +54,15 @@ public class TxnTest {
         txnServer = new JAXRSServer("coordinator", TXN_PORT);
         txnServer.addDeployment(new TMApplication(), "/");
 
-        svc1Server = new JAXRSServer("service 1", SVC1_PORT);
-        svc1Server.addDeployment(new TransactionAwareResource.ServiceApp(), "eg");
+        svc1Server = new UndertowJaxrsServer();
+        svc1Server.setPort(SVC1_PORT);
+        svc1Server.deployOldStyle(TransactionAwareResource.ServiceApp.class);
+        svc1Server.start();
 
-        svc2Server = new JAXRSServer("service 2", SVC2_PORT);
-        svc2Server.addDeployment(new TransactionAwareResource.ServiceApp(), "eg");
+        svc2Server = new UndertowJaxrsServer();
+        svc2Server.setPort(SVC2_PORT);
+        svc2Server.deployOldStyle(TransactionAwareResource.ServiceApp.class);
+        svc2Server.start();
 
         // These are used in the example to programmticaly execute the transaction
         txnClient = ClientBuilder.newClient();
