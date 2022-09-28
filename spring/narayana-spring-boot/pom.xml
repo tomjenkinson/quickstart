@@ -131,6 +131,12 @@
                 <configuration>
                     <skip>false</skip>
                     <argLine>${modular.jdk.args}</argLine>
+                    <systemProperties>
+                      <property>
+                        <name>com.arjuna.ats.arjuna.common.propertiesFile</name>
+                        <value>h2jbossts-properties.xml</value>
+                      </property>
+                    </systemProperties>
                     <includes>
                         <include>**/*Tests.java</include>
                     </includes>
